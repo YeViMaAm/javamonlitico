@@ -1,0 +1,6 @@
+ejb\LibrosFacade.class
+ejb\LibrosFacadeLocal.class
+entidades\Libros.class
+ejb\AbstractFacade.class
+controladores\LibrosController.class
+interf\Operaciones.class

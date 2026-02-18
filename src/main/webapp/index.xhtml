@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+        <ui:composition template="./plantilla/plantilla.xhtml">
+            <ui:define name="content">
+                <!-- BOTÓN NUEVO LIBRO -->
+                <p:button value="➕ Nuevo Libro" 
+                          outcome="/libros/nueva.xhtml"
+                          style="margin-bottom: 20px;"
+                          icon="pi pi-plus"/>
+                
+                <h:form id="formLibros">
+                    <p:panel header="Buscar Libros">
+                        <p:inputText value="#{librosController.filtro}" placeholder="Buscar por título..." />
+                        <p:commandButton value="Buscar" action="#{librosController.buscar}" update="tablaLibros" icon="pi pi-search" />
+                    </p:panel>
+                                        
+                    <p:dataTable id="tablaLibros" value="#{librosController.itemsFiltrados}" var="l" 
+                                 style="width:100%; font-size:12px;" 
+                                 paginator="true" rows="5"
+                                 emptyMessage="No hay libros registrados.">
+                        <p:column headerText="ID">
+                            <h:outputText value="#{l.idLibro}" />
+                        </p:column>
+                        
+                        <!-- ✅ COLUMNA DE PORTADA AGREGADA -->
+                        <p:column headerText="Portada" style="width: 80px; text-align: center;">
+                            <p:graphicImage value="#{l.imagenUrl}" 
+                                            width="60" 
+                                            height="80"
+                                            style="border-radius: 4px; border: 1px solid #ddd;"
+                                            rendered="#{not empty l.imagenUrl}"/>
+                            <p:graphicImage value="https://via.placeholder.com/60x80?text=SIN+IMAGEN" 
+                                            width="60" 
+                                            height="80"
+                                            style="border-radius: 4px; border: 1px solid #ddd; opacity: 0.7;"
+                                            rendered="#{empty l.imagenUrl}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Título">
+                            <h:outputText value="#{l.nombrelibro}" />
+                        </p:column>
+                        <p:column headerText="Género">
+                            <h:outputText value="#{l.genero}" />
+                        </p:column>
+                        <p:column headerText="Año">
+                            <h:outputText value="#{l.aniopublicacion}" />
+                        </p:column>
+                        <p:column headerText="Descripción">
+                            <h:outputText value="#{l.descripcion}" />
+                        </p:column>
+                        <p:column headerText="Editorial">
+                            <h:outputText value="#{l.editorial}" />
+                        </p:column>
+                        <p:column headerText="Autor">
+                            <h:outputText value="#{l.autor}" />
+                        </p:column>
+                        
+                        
+                        <!-- COLUMNA DE ACCIONES -->
+                        <p:column headerText="Acciones" style="width:150px; text-align: center;">
+                            <!-- Botón Editar -->
+                            <p:button icon="pi pi-pencil" 
+                                      title="Editar"
+                                      outcome="/libros/editar.xhtml"
+                                      style="margin-right: 5px;">
+                                <f:param name="idLibro" value="#{l.idLibro}"/>
+                            </p:button>
+                            
+                            <!-- Botón Eliminar -->
+                            <p:commandButton icon="pi pi-trash" 
+                                    title="Eliminar"
+                                    action="#{librosController.eliminar()}"
+                                    update="tablaLibros"
+                                    process="@this"
+                                    onclick="return confirm('¿Está seguro de eliminar #{l.nombrelibro}?')">
+                        <f:setPropertyActionListener target="#{librosController.libro}" value="#{l}" />
+                        </p:commandButton>
+                            
+                        </p:column>
+                        
+                    </p:dataTable>
+                </h:form>
+                
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

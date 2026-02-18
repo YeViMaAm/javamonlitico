@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+        <ui:composition template="../plantilla/plantilla.xhtml">
+            <ui:define name="content">
+                
+                <h2>Agregar Nuevo Libro</h2>
+                <hr/>
+                
+                <h:form>
+                    <!-- Título -->
+                    <p:outputLabel for="txtTitulo" value="Título: "/>
+                    <p:inputText id="txtTitulo" 
+                                 value="#{librosController.nuevoLibro.nombrelibro}"
+                                 required="true"
+                                 requiredMessage="Ingrese el título"/>
+                    <p:message for="txtTitulo"/>
+                    <br/>
+
+                    <!-- Descripción -->
+                    <p:outputLabel for="txtDescripcion" value="Descripción: "/>
+                    <p:inputTextarea id="txtDescripcion"
+                                     value="#{librosController.nuevoLibro.descripcion}"
+                                     required="true"
+                                     requiredMessage="Ingrese la descripción"/>
+                    <p:message for="txtDescripcion"/>
+                    <br/>
+
+                    <!-- Editorial -->
+                    <p:outputLabel for="txtEditorial" value="Editorial: "/>
+                    <p:inputText id="txtEditorial"
+                                 value="#{librosController.nuevoLibro.editorial}"
+                                 required="true"
+                                 requiredMessage="Ingrese la editorial"/>
+                    <p:message for="txtEditorial"/>
+                    <br/>
+
+                    <!-- Año -->
+                    <p:outputLabel for="txtAnio" value="Año: "/>
+                    <p:inputText id="txtAnio"
+                                 value="#{librosController.nuevoLibro.aniopublicacion}"
+                                 required="true"
+                                 requiredMessage="Ingrese el año"/>
+                    <p:message for="txtAnio"/>
+                    <br/>
+
+                    <!-- Género -->
+                    <p:outputLabel for="txtGenero" value="Género: "/>
+                    <p:inputText id="txtGenero"
+                                 value="#{librosController.nuevoLibro.genero}"
+                                 required="true"
+                                 requiredMessage="Ingrese el género"/>
+                    <p:message for="txtGenero"/>
+                    <br/>
+
+                    <!-- Autor -->
+                    <p:outputLabel for="txtAutor" value="Autor: "/>
+                    <p:inputText id="txtAutor"
+                                 value="#{librosController.nuevoLibro.autor}"
+                                 required="true"
+                                 requiredMessage="Ingrese el autor"/>
+                    <p:message for="txtAutor"/>
+                    <br/>
+                    
+                    
+                    <p:outputLabel for="txtImagen" value="URL de Imagen: "/>
+                    <p:inputText id="txtImagen"
+                                 value="#{librosController.nuevoLibro.imagenUrl}"
+                                 placeholder="https://ejemplo.com/imagen-libro.jpg"
+                                 style="width: 100%;"/>
+                    <small style="display:block; color: #666; margin-bottom: 10px;">
+                    </small>
+                    <br/>
+
+                    
+                    <!-- Botón Guardar SIMPLE como en el libro -->
+                   <p:commandButton value="Guardar" 
+                    action="#{librosController.registrar()}"
+                    update="@form"          
+                    process="@form"         
+                    icon="pi pi-check"/>
+                 
+                    <p:button value="Cancelar" 
+                              outcome="/index.xhtml"
+                              icon="pi pi-times"
+                              style="margin-left: 10px;"/>
+                 
+                </h:form>
+                
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

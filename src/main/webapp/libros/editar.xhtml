@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:metadata>
+        <f:viewParam name="idLibro" value="#{librosController.idLibro}" />
+        <f:event type="preRenderView" listener="#{librosController.buscarPorId()}" />
+    </f:metadata>
+
+    <body>
+        <ui:composition template="../plantilla/plantilla.xhtml">
+            <ui:define name="content">
+                
+                <h2>Editar Libro</h2>
+                <hr/>
+                
+                <h:form>
+                    <!-- Título -->
+                    <p:outputLabel for="editTitulo" value="Título:"/>
+                    <p:inputText id="editTitulo" 
+                                 value="#{librosController.libro.nombrelibro}"
+                                 required="true"
+                                 requiredMessage="Ingrese el título"/>
+                    <p:message for="editTitulo"/>
+                    <br/>
+
+                    <!-- Descripción -->
+                    <p:outputLabel for="editDescripcion" value="Descripción:"/>
+                    <p:inputTextarea id="editDescripcion"
+                                     value="#{librosController.libro.descripcion}"
+                                     required="true"
+                                     requiredMessage="Ingrese la descripción"/>
+                    <p:message for="editDescripcion"/>
+                    <br/>
+
+                    <!-- Editorial -->
+                    <p:outputLabel for="editEditorial" value="Editorial:"/>
+                    <p:inputText id="editEditorial"
+                                 value="#{librosController.libro.editorial}"
+                                 required="true"
+                                 requiredMessage="Ingrese la editorial"/>
+                    <p:message for="editEditorial"/>
+                    <br/>
+
+                    <!-- Año -->
+                    <p:outputLabel for="editAnio" value="Año:"/>
+                    <p:inputText id="editAnio"
+                                 value="#{librosController.libro.aniopublicacion}"
+                                 required="true"
+                                 requiredMessage="Ingrese el año"/>
+                    <p:message for="editAnio"/>
+                    <br/>
+
+                    <!-- Género -->
+                    <p:outputLabel for="editGenero" value="Género:"/>
+                    <p:inputText id="editGenero"
+                                 value="#{librosController.libro.genero}"
+                                 required="true"
+                                 requiredMessage="Ingrese el género"/>
+                    <p:message for="editGenero"/>
+                    <br/>
+
+                    <!-- Autor -->
+                    <p:outputLabel for="editAutor" value="Autor:"/>
+                    <p:inputText id="editAutor"
+                                 value="#{librosController.libro.autor}"
+                                 required="true"
+                                 requiredMessage="Ingrese el autor"/>
+                    <p:message for="editAutor"/>
+                    <br/>
+
+                    
+                    <!-- ✅ CAMPO DE URL DE IMAGEN AGREGADO -->
+                    <p:outputLabel for="editImagen" value="URL de Imagen: "/>
+                    <p:inputText id="editImagen"
+                                 value="#{librosController.libro.imagenUrl}"
+                                 placeholder="https://ejemplo.com/imagen-libro.jpg"
+                                 style="width: 100%;"/>
+                    <small style="display:block; color: #666; margin-bottom: 10px;">
+                    </small>
+                    <br/>
+                    
+                    
+                   
+                    <!-- Botones -->
+                    <p:commandButton value="Actualizar" 
+                                action="#{librosController.actualizar()}"
+                                update="@form"         
+                                process="@form"        
+                                icon="pi pi-check"/>
+                    
+                    <p:button value="Cancelar" 
+                              outcome="/index.xhtml"
+                              icon="pi pi-times"
+                              style="margin-left: 10px;"/>
+                </h:form>
+                
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
