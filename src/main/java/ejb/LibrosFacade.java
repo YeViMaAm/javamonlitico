@@ -16,7 +16,7 @@ import jakarta.persistence.PersistenceContext;
 @Stateless
 public class LibrosFacade extends AbstractFacade<Libros> implements LibrosFacadeLocal {
 
-    @PersistenceContext(unitName = "my_persistence_unit")
+    @PersistenceContext(unitName = "com.co.ucatolica_libreriaUC_war_1.0PU")
     private EntityManager em;
 
     @Override
